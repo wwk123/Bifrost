@@ -1,0 +1,12 @@
+export { HeroSection } from './hero-section';
+export { InsightMetrics } from './insight-metrics';
+export { LeaderboardSection } from './leaderboard-section';
+export { AchievementsSection } from './achievements-section';
+export { StrategyHub } from './strategy-hub';
+export { ChallengesSection } from './challenges-section';
+export { ReferralRewards } from './referral-rewards';
+export { ShareHighlights } from './share-highlights';
+export { PerformanceTrend } from './performance-trend';
+export { TeamCompetitionSection } from './team-competition-section';
+export { ApyPredictionSection } from './apy-prediction-section';
+export { SmartHedgingSection } from './smart-hedging-section';

@@ -1,0 +1,136 @@
+(node:39128) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ✓ Compiled / in 10.8s (2077 modules)
+ GET / 500 in 6639ms
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43) 
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:283:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:261:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:239:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "2814488369"
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:283:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:261:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:239:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "2814488369"
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 5.5s (2071 modules)
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:262:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:240:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:218:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "1886193203"
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 5702ms
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:283:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:261:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:239:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "2814488369"
+ GET / 500 in 189ms
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:283:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:261:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\page.js:239:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "2814488369"
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 26ms
+ ○ Compiling /arena ...
+ ✓ Compiled /arena in 4.7s (3168 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ○ Compiling /leaderboard ...
+ ✓ Compiled /leaderboard in 1059ms (3183 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ○ Compiling /strategies ...
+ ✓ Compiled /strategies in 713ms (3188 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:262:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:240:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:218:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "1886193203"
+ GET /strategies/create 404 in 160ms
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:262:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:240:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:218:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "1886193203"
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 35ms
+ ○ Compiling /challenges ...
+ ✓ Compiled /challenges in 721ms (3194 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ○ Compiling /teams ...
+ ✓ Compiled /teams in 720ms (3198 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:262:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:240:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:218:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "1886193203"
+ GET /teams/create 404 in 124ms
+ ⨯ ReferenceError: window is not defined
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/utils/wallet.ts:15:82)
+    at (ssr)/./src/utils/wallet.ts (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:262:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/wallet-provider.tsx:10:71)
+    at (ssr)/./src/providers/wallet-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:240:1)
+    at __webpack_require__ (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+    at eval (./src/providers/app-provider.tsx:8:74)
+    at (ssr)/./src/providers/app-provider.tsx (G:\project\tuyuan\RWA\polkadot\.next\server\app\_not-found\page.js:218:1)
+    at Object.__webpack_require__ [as require] (G:\project\tuyuan\RWA\polkadot\.next\server\webpack-runtime.js:33:43)
+digest: "1886193203"
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 25ms
