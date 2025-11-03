@@ -87,7 +87,7 @@ export function LeaderboardSection() {
                       <div className="flex items-center gap-3">
                         <span
                           className={clsx(
-                            'flex h-10 w-10 items-center justify-between rounded-full text-base font-bold',
+                            'flex h-10 w-10 items-center justify-center rounded-full text-base font-bold',
                             rankGradient[(entry as LeaderboardEntry).rank] ?? fallbackGradient
                           )}
                         >
@@ -138,12 +138,13 @@ export function LeaderboardSection() {
         </div>
 
         <div className="rounded-2xl border border-white/5 bg-white/5">
-          <div className="hidden grid-cols-[auto,1fr,1fr,1fr,auto] items-center gap-4 px-6 py-3 text-xs uppercase tracking-wide text-text-secondary md:grid">
+          <div className="hidden grid-cols-[60px,1.5fr,1fr,1fr,1fr,80px] items-center gap-4 px-6 py-3 text-xs uppercase tracking-wide text-text-secondary md:grid">
             <span>排名</span>
             <span>用户</span>
             <span>收益</span>
             <span>胜率</span>
             <span>策略</span>
+            <span>操作</span>
           </div>
           <div className="divide-y divide-white/5">
             {entries.map((entry, index) => {
@@ -153,13 +154,13 @@ export function LeaderboardSection() {
                 <div
                   key={hasEntry ? (entry as LeaderboardEntry).rank : `list-skeleton-${index}`}
                   className={clsx(
-                    'grid items-center gap-4 px-4 py-4 text-sm transition hover:bg-white/5 md:grid-cols-[60px,1.5fr,1fr,1fr,auto]',
+                    'grid items-center gap-4 px-4 py-4 text-sm transition hover:bg-white/5 md:grid-cols-[60px,1.5fr,1fr,1fr,1fr,80px]',
                     hasEntry && (entry as LeaderboardEntry).isYou && 'border-l-4 border-bifrost-pink bg-white/10/30 md:border-0'
                   )}
                 >
                   {hasEntry ? (
                   <>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 md:justify-center">
                       <span
                         className={clsx(
                           'flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold',
@@ -168,9 +169,9 @@ export function LeaderboardSection() {
                       >
                         {(entry as LeaderboardEntry).rank}
                       </span>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col md:hidden">
                         <span className="font-medium text-white">{(entry as LeaderboardEntry).username}</span>
-                        <span className="text-xs text-text-secondary md:hidden">
+                        <span className="text-xs text-text-secondary">
                           {formatCurrency((entry as LeaderboardEntry).gainUsd)} · 胜率 {formatPercent((entry as LeaderboardEntry).winRate)}
                         </span>
                       </div>

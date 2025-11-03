@@ -1,23 +1,18 @@
 import { Metadata } from 'next';
+import { Users, Lightbulb, Trophy } from 'lucide-react';
 
+import { TeamCompetitionSection, StrategyHub } from '@/components/dashboard';
 import {
-  AchievementsSection,
-  ChallengesSection,
-  HeroSection,
-  InsightMetrics,
-  LeaderboardSection,
-  PerformanceTrend,
-  ReferralRewards,
-  ShareHighlights,
-  StrategyHub,
-  TeamCompetitionSection,
-  ApyPredictionSection,
-  SmartHedgingSection
-} from '@/components/dashboard';
+  PowerOverview,
+  MyRankCard,
+  ActiveChallenges,
+  AchievementWall,
+  AnalyticsQuickCards
+} from '@/components/arena';
 
 export const metadata: Metadata = {
   title: '战绩大厅 - Bifrost Arena',
-  description: '查看你的竞技数据、收益趋势和实时排名。追踪你的DeFi收益表现,解锁新成就!',
+  description: '查看你的竞技数据、等级进度和成就墙。追踪你的DeFi收益表现,解锁新成就!',
   openGraph: {
     title: '📊 我的战绩大厅 - Bifrost Arena',
     description: '正在竞技场中冲击更高排名!',
@@ -27,85 +22,122 @@ export const metadata: Metadata = {
 
 export default function ArenaPage() {
   return (
-    <div className="flex flex-col gap-10">
-      {/* Zone Header */}
-      <div className="glass-panel relative overflow-hidden rounded-3xl border border-success/20 px-8 py-6">
-        <div className="absolute right-0 top-0 h-48 w-48 translate-x-12 -translate-y-12 rounded-full bg-success/20 blur-3xl" />
-        <div className="relative flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-success/20">
-            <span className="text-4xl">📊</span>
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-white">战绩大厅</h1>
-            <p className="text-text-secondary">Personal Dashboard · 追踪你的竞技表现</p>
-          </div>
-        </div>
+    <div className="flex flex-col gap-8">
+      {/* 1. Power Overview - 战力总览 */}
+      <PowerOverview
+        level={3}
+        levelName="黄金勇者"
+        powerScore={78}
+        nextLevelScore={100}
+        weeklyGain={8234}
+        weeklyWinRate={0.87}
+        currentRank={42}
+        totalRevenue={24680}
+      />
+
+      {/* 2. Rank & Challenges - 排名与挑战 */}
+      <div className="grid gap-8 lg:grid-cols-[1fr,1.2fr]">
+        <MyRankCard
+          currentRank={42}
+          previousRank={50}
+          totalPlayers={1523}
+          gapToNext={1234}
+          topThreePlayers={[
+            { username: 'Whale', gainUsd: 15234 },
+            { username: 'Trader', gainUsd: 12890 },
+            { username: 'Alice', gainUsd: 9456 }
+          ]}
+        />
+        <ActiveChallenges />
       </div>
 
-      <HeroSection />
-      <InsightMetrics />
-      <PerformanceTrend />
+      {/* 3. Achievement Wall - 成就墙 */}
+      <AchievementWall />
 
-      {/* Quick Links to other zones */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <a
+      {/* 4. Quick Entry Cards - 快速入口 */}
+      <div className="grid gap-6 md:grid-cols-3">
+        <QuickEntryCard
+          href="/teams"
+          icon={<Users className="h-6 w-6" />}
+          title="团队竞赛"
+          description="组建团队，团结就是力量"
+          gradient="from-cyan-500/20 to-blue-500/10"
+          emoji="👥"
+        />
+        <QuickEntryCard
+          href="/strategies"
+          icon={<Lightbulb className="h-6 w-6" />}
+          title="策略中心"
+          description="学习高手策略和技巧"
+          gradient="from-purple-500/20 to-pink-500/10"
+          emoji="💡"
+        />
+        <QuickEntryCard
           href="/leaderboard"
-          className="group glass-panel rounded-2xl border border-yellow-500/20 p-6 transition-all hover:border-yellow-500/40 hover:shadow-xl"
-        >
-          <div className="mb-3 flex items-center gap-3">
-            <span className="text-3xl">🏆</span>
-            <h3 className="text-xl font-bold text-white">查看荣耀榜</h3>
-          </div>
-          <p className="text-sm text-text-secondary">查看你在全球排行榜中的位置</p>
-        </a>
-
-        <a
-          href="/challenges"
-          className="group glass-panel rounded-2xl border border-warning/20 p-6 transition-all hover:border-warning/40 hover:shadow-xl"
-        >
-          <div className="mb-3 flex items-center gap-3">
-            <span className="text-3xl">⚔️</span>
-            <h3 className="text-xl font-bold text-white">参与挑战</h3>
-          </div>
-          <p className="text-sm text-text-secondary">完成挑战,赢取奖励</p>
-        </a>
+          icon={<Trophy className="h-6 w-6" />}
+          title="荣耀榜"
+          description="查看全服排行榜"
+          gradient="from-yellow-500/20 to-orange-500/10"
+          emoji="🏆"
+        />
       </div>
 
-      {/* Mini Leaderboard */}
-      <div id="leaderboard">
-        <LeaderboardSection />
-      </div>
-
-      {/* Teams */}
-      <div id="teams">
-        <TeamCompetitionSection />
-      </div>
-
-      {/* Strategy & Achievements */}
-      <div className="grid gap-10 xl:grid-cols-[2fr_1fr]">
+      {/* 5. Teams & Strategy - 团队与策略 */}
+      <div className="grid gap-8 xl:grid-cols-2">
+        <div id="teams">
+          <TeamCompetitionSection />
+        </div>
         <div id="strategies">
           <StrategyHub />
         </div>
-        <div id="achievements">
-          <AchievementsSection />
-        </div>
       </div>
 
-      {/* APY & Hedging */}
-      <div className="grid gap-10 xl:grid-cols-2">
-        <ApyPredictionSection />
-        <SmartHedgingSection />
+      {/* 6. Advanced Analytics - 高级分析 */}
+      <div>
+        <h2 className="mb-6 text-2xl font-bold text-white">高级分析</h2>
+        <AnalyticsQuickCards />
       </div>
-
-      {/* Challenges & Referral */}
-      <div className="grid gap-10 xl:grid-cols-2">
-        <div id="challenges">
-          <ChallengesSection />
-        </div>
-        <ReferralRewards />
-      </div>
-
-      <ShareHighlights />
     </div>
+  );
+}
+
+function QuickEntryCard({
+  href,
+  icon,
+  title,
+  description,
+  gradient,
+  emoji
+}: {
+  href: string;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  gradient: string;
+  emoji: string;
+}) {
+  return (
+    <a
+      href={href}
+      className={`group glass-panel relative overflow-hidden rounded-2xl border border-white/10 p-6 transition-all hover:border-white/20 hover:shadow-xl`}
+    >
+      {/* Background Gradient */}
+      <div className={`absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full bg-gradient-to-br ${gradient} blur-2xl opacity-50 group-hover:opacity-100 transition`} />
+
+      <div className="relative space-y-3">
+        <div className="flex items-center justify-between">
+          <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${gradient}`}>
+            {icon}
+          </div>
+          <span className="text-3xl">{emoji}</span>
+        </div>
+        <div>
+          <h3 className="text-lg font-bold text-white group-hover:text-bifrost-pink transition">
+            {title}
+          </h3>
+          <p className="mt-1 text-sm text-text-secondary">{description}</p>
+        </div>
+      </div>
+    </a>
   );
 }
