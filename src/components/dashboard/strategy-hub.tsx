@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
@@ -11,13 +11,19 @@ import { useWallet } from '@/providers/wallet-provider';
 import { toast } from '@/state/use-toast-store';
 import { formatCompactNumber, formatPercent } from '@/utils/format';
 
+type StrategyCategory = 'all' | 'featured' | 'high-yield' | 'low-risk' | 'fast-growth';
+
 const toneStyles: Record<Strategy['segments'][number]['tone'], string> = {
   low: 'bg-success/15 text-success border-success/30',
   mid: 'bg-info/15 text-info border-info/30',
   high: 'bg-warning/15 text-warning border-warning/30'
 };
 
-export function StrategyHub() {
+interface StrategyHubProps {
+  category?: StrategyCategory;
+}
+
+export function StrategyHub({ category = 'all' }: StrategyHubProps) {
   const { isConnected } = useWallet();
   const selectedStrategyId = useDashboardStore((state) => state.selectedStrategyId);
   const setSelectedStrategyId = useDashboardStore((state) => state.setSelectedStrategyId);
@@ -29,7 +35,37 @@ export function StrategyHub() {
     staleTime: 1000 * 60 * 5
   });
 
-  const strategies = data ?? Array.from({ length: 3 });
+  // 根据分类过滤策略
+  const filteredStrategies = useMemo(() => {
+    if (!data) return [];
+
+    switch (category) {
+      case 'featured':
+        // 精选推荐：根据点赞数和采用率排序，取前10个
+        return [...data]
+          .sort((a, b) => (b.likes + b.adoption) - (a.likes + a.adoption))
+          .slice(0, 10);
+
+      case 'high-yield':
+        // 高收益：月收益 > 15%
+        return data.filter(s => s.monthlyReturn > 0.15);
+
+      case 'low-risk':
+        // 低风险：风险等级为"低风险"
+        return data.filter(s => s.riskLevel === '低风险');
+
+      case 'fast-growth':
+        // 快速增长：采用率高于平均值
+        const avgAdoption = data.reduce((sum, s) => sum + s.adoption, 0) / data.length;
+        return data.filter(s => s.adoption > avgAdoption);
+
+      case 'all':
+      default:
+        return data;
+    }
+  }, [data, category]);
+
+  const strategies = filteredStrategies.length > 0 ? filteredStrategies : Array.from({ length: 3 });
 
   const handleCopyStrategy = async (strategy: Strategy) => {
     if (!isConnected) {
@@ -69,11 +105,27 @@ export function StrategyHub() {
     // 未来可以打开评论/讨论模态框或跳转到讨论页面
   };
 
+  // 分类标题映射
+  const categoryTitles: Record<StrategyCategory, string> = {
+    all: '全部策略',
+    featured: '精选推荐策略',
+    'high-yield': '高收益策略',
+    'low-risk': '低风险策略',
+    'fast-growth': '快速增长策略'
+  };
+
   return (
     <section className="glass-panel rounded-3xl border border-white/5 px-6 py-6 shadow-card lg:px-8">
       <div className="flex flex-col gap-3 pb-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-2xl font-semibold text-white">策略共创广场</h2>
+          <h2 className="text-2xl font-semibold text-white">
+            {categoryTitles[category]}
+            {category !== 'all' && (
+              <span className="ml-2 text-base font-normal text-text-secondary">
+                ({filteredStrategies.length} 个策略)
+              </span>
+            )}
+          </h2>
           <p className="text-sm text-text-secondary">
             浏览高收益策略，点赞、复制并分享你的独特配置。
           </p>

@@ -16,7 +16,10 @@
       "Bash(git commit -m \"$(cat <<''EOF''\n初始提交：Bifrost 社交化收益竞赛平台\n\n这是一个基于 Bifrost 的社交化收益竞赛平台的完整实现，包含以下核心功能：\n\n- 多钱包支持（Polkadot 和 EVM 钱包）\n- 游戏化功能（每日转盘、成就系统、排行榜）\n- 智能对冲策略\n- APY 预测系统\n- 团队竞赛功能\n- 社交分享和推荐奖励\n\n技术栈：Next.js 14, React, TypeScript, TailwindCSS, Polkadot.js, wagmi\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git remote add:*)",
       "Bash(git push:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(timeout 3 bash:*)",
+      "Bash(nul)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []

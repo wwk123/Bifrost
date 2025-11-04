@@ -3,8 +3,10 @@
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 import { fetchAchievements, type Achievement } from '@/data/mock';
+import { AchievementUnlockModal, useAchievementUnlock } from '@/components/gamification/AchievementUnlockModal';
 
 const statusTone: Record<Achievement['status'], string> = {
   'in-progress': 'text-warning',
@@ -20,20 +22,50 @@ export function AchievementsSection() {
   });
 
   const achievements = data ?? Array.from({ length: 4 });
+  const { unlockedAchievement, isModalOpen, checkAndUnlock, closeModal } = useAchievementUnlock();
+  const previousAchievements = useRef<Achievement[]>([]);
+
+  // 检测成就解锁
+  useEffect(() => {
+    if (data && data.length > 0) {
+      data.forEach((achievement, index) => {
+        const previous = previousAchievements.current[index];
+
+        // 检测从 in-progress 到 unlocked 的变化
+        if (
+          previous &&
+          previous.status === 'in-progress' &&
+          achievement.status === 'unlocked' &&
+          achievement.progress >= achievement.target
+        ) {
+          checkAndUnlock(achievement);
+        }
+      });
+
+      previousAchievements.current = data;
+    }
+  }, [data, checkAndUnlock]);
 
   return (
-    <section className="glass-panel flex h-full flex-col rounded-3xl border border-white/5 px-6 py-6 shadow-card lg:px-8">
-      <div className="flex flex-col gap-3 pb-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <h2 className="text-2xl font-semibold text-white">成就勋章</h2>
-          <p className="text-sm text-text-secondary">
-            完成任务即可解锁徽章，提升段位，收获社交炫耀资本。
-          </p>
+    <>
+      <AchievementUnlockModal
+        achievement={unlockedAchievement}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
+
+      <section className="glass-panel flex h-full flex-col rounded-3xl border border-white/5 px-6 py-6 shadow-card lg:px-8">
+        <div className="flex flex-col gap-3 pb-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold text-white">成就勋章</h2>
+            <p className="text-sm text-text-secondary">
+              完成任务即可解锁徽章，提升段位，收获社交炫耀资本。
+            </p>
+          </div>
+          <button className="rounded-full border border-white/10 px-3 py-1 text-xs text-text-secondary hover:border-white/20 hover:text-white">
+            查阅全部成就
+          </button>
         </div>
-        <button className="rounded-full border border-white/10 px-3 py-1 text-xs text-text-secondary hover:border-white/20 hover:text-white">
-          查阅全部成就
-        </button>
-      </div>
       <div className="flex-1 space-y-4 overflow-auto pr-1">
         {achievements.map((item, index) => (
           <motion.div
@@ -83,7 +115,8 @@ export function AchievementsSection() {
           <p className="text-center text-xs text-text-secondary">加载成就数据中...</p>
         )}
       </div>
-    </section>
+      </section>
+    </>
   );
 }
 

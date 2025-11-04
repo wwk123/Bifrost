@@ -3,6 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 import {
   fetchLeaderboard,
@@ -11,6 +13,8 @@ import {
 } from '@/data/mock';
 import { useDashboardStore } from '@/state/use-dashboard-store';
 import { formatCurrency, formatPercent } from '@/utils/format';
+import { SocialFeed } from '@/components/social/SocialFeed';
+import { useRankChangeDetector, useRankingGoals, useRankTrend } from '@/hooks/useRankChangeDetector';
 
 const timeframeOptions: { label: string; value: Timeframe }[] = [
   { label: '本周', value: 'week' },
@@ -39,6 +43,21 @@ export function LeaderboardSection() {
   const entries = data ?? [];
   const topEntries = isLoading ? Array.from({ length: 5 }) : entries.filter((item) => item.rank <= 5);
   const youEntry = entries.find((item) => item.isYou);
+
+  // 排名变化检测
+  const { rankChangeEvents, detectRankChanges } = useRankChangeDetector();
+  const rankingGoals = useRankingGoals(youEntry?.rank);
+  const { analyzeTrend } = useRankTrend();
+
+  // 检测排名变化
+  useEffect(() => {
+    if (data) {
+      detectRankChanges(data);
+    }
+  }, [data, detectRankChanges]);
+
+  // 分析排名趋势
+  const rankTrend = youEntry ? analyzeTrend(youEntry.rank) : null;
 
   return (
     <section className="glass-panel rounded-3xl border border-white/5 px-6 py-6 shadow-card lg:px-8">
@@ -201,19 +220,40 @@ export function LeaderboardSection() {
         </div>
 
         {youEntry && (
-          <div className="flex items-center justify-between rounded-2xl border border-bifrost-pink/40 bg-bifrost-pink/10 px-6 py-4 text-sm text-white shadow-card">
-            <div>
-              <p className="text-base font-semibold">你当前排名第 {youEntry.rank}</p>
-              <p className="text-xs text-white/70">
-                再获得 {formatCurrency(Math.max(0, 5000 - youEntry.gainUsd))} 即可冲进前 20%
-              </p>
+          <>
+            <div className="flex items-center justify-between rounded-2xl border border-bifrost-pink/40 bg-bifrost-pink/10 px-6 py-4 text-sm text-white shadow-card">
+              <div className="flex-1">
+                <div className="flex items-center gap-3">
+                  <p className="text-base font-semibold">你当前排名第 {youEntry.rank}</p>
+                  {rankTrend && (
+                    <div className={`flex items-center gap-1 text-xs ${rankTrend.color}`}>
+                      {rankTrend.direction === 'up' && <TrendingUp className="h-4 w-4" />}
+                      {rankTrend.direction === 'down' && <TrendingDown className="h-4 w-4" />}
+                      <span>{rankTrend.message}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="mt-1 flex flex-col gap-1">
+                  <p className="text-xs text-white/70">
+                    再获得 {formatCurrency(Math.max(0, 5000 - youEntry.gainUsd))} 即可冲进前 20%
+                  </p>
+                  {rankingGoals.length > 0 && (
+                    <p className="text-xs font-semibold text-warning">
+                      🎯 {rankingGoals[0].message}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <button className="rounded-full bg-white/15 px-4 py-2 text-xs font-semibold text-white hover:bg-white/25">
+                查看提升建议
+              </button>
             </div>
-            <button className="rounded-full bg-white/15 px-4 py-2 text-xs font-semibold text-white hover:bg-white/25">
-              查看提升建议
-            </button>
-          </div>
+          </>
         )}
       </div>
+
+      {/* 排名变化通知 */}
+      <SocialFeed events={rankChangeEvents} position="bottom-right" maxVisible={3} />
     </section>
   );
 }

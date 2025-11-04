@@ -1,21 +1,16 @@
+'use client';
+
+import { useState } from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { BookOpen, TrendingUp, Users, Star } from 'lucide-react';
 
 import { StrategyHub } from '@/components/dashboard';
 
-export const metadata: Metadata = {
-  title: '策略图书馆 - Bifrost Arena',
-  description: '学习、分享和复制顶级DeFi投资策略。浏览社区精选策略,找到最适合你的收益方案!',
-  openGraph: {
-    title: '📚 策略图书馆 - Bifrost Arena',
-    description: '探索顶级DeFi策略,提升你的收益!',
-    images: ['/og-strategies.png']
-  },
-  keywords: ['DeFi Strategies', 'Investment', 'Yield Optimization', '策略', 'Bifrost']
-};
+type StrategyCategory = 'all' | 'featured' | 'high-yield' | 'low-risk' | 'fast-growth';
 
 export default function StrategiesPage() {
+  const [selectedCategory, setSelectedCategory] = useState<StrategyCategory>('all');
   return (
     <div className="flex flex-col gap-10">
       {/* Zone Header */}
@@ -75,25 +70,60 @@ export default function StrategiesPage() {
 
       {/* Categories */}
       <div className="flex flex-wrap gap-3">
-        <button className="rounded-full border border-bifrost-pink/50 bg-bifrost-pink/20 px-6 py-2.5 text-sm font-semibold text-white">
+        <button
+          onClick={() => setSelectedCategory('all')}
+          className={`rounded-full border px-6 py-2.5 text-sm font-semibold transition-all ${
+            selectedCategory === 'all'
+              ? 'border-bifrost-pink/50 bg-bifrost-pink/20 text-white'
+              : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-white'
+          }`}
+        >
           🔥 全部策略
         </button>
-        <button className="rounded-full border border-white/10 px-6 py-2.5 text-sm font-semibold text-text-secondary transition-all hover:border-white/20 hover:text-white">
+        <button
+          onClick={() => setSelectedCategory('featured')}
+          className={`rounded-full border px-6 py-2.5 text-sm font-semibold transition-all ${
+            selectedCategory === 'featured'
+              ? 'border-bifrost-pink/50 bg-bifrost-pink/20 text-white'
+              : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-white'
+          }`}
+        >
           ⭐ 精选推荐
         </button>
-        <button className="rounded-full border border-white/10 px-6 py-2.5 text-sm font-semibold text-text-secondary transition-all hover:border-white/20 hover:text-white">
+        <button
+          onClick={() => setSelectedCategory('high-yield')}
+          className={`rounded-full border px-6 py-2.5 text-sm font-semibold transition-all ${
+            selectedCategory === 'high-yield'
+              ? 'border-bifrost-pink/50 bg-bifrost-pink/20 text-white'
+              : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-white'
+          }`}
+        >
           🎯 高收益
         </button>
-        <button className="rounded-full border border-white/10 px-6 py-2.5 text-sm font-semibold text-text-secondary transition-all hover:border-white/20 hover:text-white">
+        <button
+          onClick={() => setSelectedCategory('low-risk')}
+          className={`rounded-full border px-6 py-2.5 text-sm font-semibold transition-all ${
+            selectedCategory === 'low-risk'
+              ? 'border-bifrost-pink/50 bg-bifrost-pink/20 text-white'
+              : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-white'
+          }`}
+        >
           🛡️ 低风险
         </button>
-        <button className="rounded-full border border-white/10 px-6 py-2.5 text-sm font-semibold text-text-secondary transition-all hover:border-white/20 hover:text-white">
+        <button
+          onClick={() => setSelectedCategory('fast-growth')}
+          className={`rounded-full border px-6 py-2.5 text-sm font-semibold transition-all ${
+            selectedCategory === 'fast-growth'
+              ? 'border-bifrost-pink/50 bg-bifrost-pink/20 text-white'
+              : 'border-white/10 text-text-secondary hover:border-white/20 hover:text-white'
+          }`}
+        >
           ⚡ 快速增长
         </button>
       </div>
 
       {/* Main Strategy Hub */}
-      <StrategyHub />
+      <StrategyHub category={selectedCategory} />
 
       {/* Create Strategy CTA */}
       <div className="glass-panel rounded-3xl border border-bifrost-primary/20 p-8 text-center">
