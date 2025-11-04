@@ -8,9 +8,11 @@ const nextConfig = {
       }
     ]
   },
-  // Enable instrumentation for SSR polyfills
+  // Suppress hydration warnings for client-only libraries
+  reactStrictMode: true,
+  // Optimize server-side rendering
   experimental: {
-    instrumentationHook: true,
+    optimizePackageImports: ['framer-motion'],
   }
 };
 

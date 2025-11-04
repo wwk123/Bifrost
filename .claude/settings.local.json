@@ -19,7 +19,11 @@
       "Bash(npx tsc:*)",
       "Bash(timeout 3 bash:*)",
       "Bash(nul)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(if [ -f \".next/server/chunks/588.js\" ])",
+      "Bash(then head -n 35 .next/server/chunks/588.js)",
+      "Bash(fi)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

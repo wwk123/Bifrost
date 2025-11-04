@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   keywords: ['Bifrost', 'Polkadot', 'Liquid Staking', 'Social DeFi', '收益竞赛']
 };
 
+// Force dynamic rendering for all pages to avoid SSR issues with client-only libraries
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN">
