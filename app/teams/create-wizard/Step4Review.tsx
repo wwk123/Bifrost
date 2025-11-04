@@ -115,7 +115,7 @@ export function Step4Review({ formData, onEdit, isConnected }: Step4Props) {
                 准备就绪!
               </div>
               <div className="text-xs text-text-secondary">
-                点击下方"创建战队"按钮完成创建。创建后部分设置仍可修改。
+                点击下方&quot;创建战队&quot;按钮完成创建。创建后部分设置仍可修改。
               </div>
             </div>
           </div>

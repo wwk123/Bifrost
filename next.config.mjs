@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverActions: true
-  },
   images: {
     remotePatterns: [
       {
@@ -10,6 +7,10 @@ const nextConfig = {
         hostname: "**"
       }
     ]
+  },
+  // Enable instrumentation for SSR polyfills
+  experimental: {
+    instrumentationHook: true,
   }
 };
 

@@ -8,6 +8,9 @@ import clsx from 'clsx';
 import { useWallet } from '@/providers/wallet-provider';
 import { toast } from '@/state/use-toast-store';
 
+// Force dynamic rendering to avoid SSR window errors
+export const dynamic = 'force-dynamic';
+
 interface CompletedChallenge {
   id: string;
   title: string;

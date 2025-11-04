@@ -3,6 +3,9 @@
 import Link from 'next/link';
 import { ArrowRight, Trophy, BookOpen, Swords, Shield, Sparkles, Brain } from 'lucide-react';
 
+// Force dynamic rendering to avoid SSR window errors
+export const dynamic = 'force-dynamic';
+
 const arenaZones = [
   {
     href: '/arena',

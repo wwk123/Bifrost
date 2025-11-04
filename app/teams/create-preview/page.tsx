@@ -71,8 +71,7 @@ export default function CreateTeamPreviewPage() {
       if (typeof window !== 'undefined') {
         const toastModule = await import('@/state/use-toast-store');
         toastModule.toast.success(
-          `战队 "${validatedData.name}" 创建成功!`,
-          { description: '正在跳转到战队列表...' }
+          `战队 "${validatedData.name}" 创建成功! 正在跳转到战队列表...`
         );
       }
 
@@ -85,8 +84,7 @@ export default function CreateTeamPreviewPage() {
       if (typeof window !== 'undefined') {
         const toastModule = await import('@/state/use-toast-store');
         toastModule.toast.error(
-          '创建失败',
-          { description: error.message || '未知错误,请重试' }
+          `创建失败: ${error.message || '未知错误,请重试'}`
         );
       }
     } finally {

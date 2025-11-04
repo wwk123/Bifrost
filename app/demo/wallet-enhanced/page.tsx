@@ -5,6 +5,9 @@ import { EnhancedWalletButton } from '@/components/wallet/enhanced-wallet-button
 import type { WalletType, SupportedWallet } from '@/types/wallet';
 import { motion } from 'framer-motion';
 
+// Force dynamic rendering to avoid SSR window errors
+export const dynamic = 'force-dynamic';
+
 export default function EnhancedWalletDemoPage() {
   const [connectedWallet, setConnectedWallet] = useState<{
     address: string;

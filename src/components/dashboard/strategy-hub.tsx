@@ -51,8 +51,8 @@ export function StrategyHub({ category = 'all' }: StrategyHubProps) {
         return data.filter(s => s.monthlyReturn > 0.15);
 
       case 'low-risk':
-        // 低风险：风险等级为"低风险"
-        return data.filter(s => s.riskLevel === '低风险');
+        // 低风险：风险等级为"稳健"
+        return data.filter(s => s.riskLevel === '稳健');
 
       case 'fast-growth':
         // 快速增长：采用率高于平均值
@@ -141,44 +141,46 @@ export function StrategyHub({ category = 'all' }: StrategyHubProps) {
       <div className="space-y-4">
         {strategies.map((strategy, index) => (
           <motion.div
-            key={strategy && 'id' in strategy ? strategy.id : index}
+            key={strategy && typeof strategy === 'object' && 'id' in strategy ? (strategy.id as number) : index}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: index * 0.05 }}
             className={clsx(
               'rounded-3xl border border-white/5 bg-white/5 p-5 text-sm text-text-secondary transition hover:border-white/10 hover:bg-white/10',
-              strategy && 'id' in strategy && strategy.id === selectedStrategyId && 'border-bifrost-pink bg-bifrost-pink/10'
+              (strategy && typeof strategy === 'object' && 'id' in strategy && strategy.id === selectedStrategyId) ? 'border-bifrost-pink bg-bifrost-pink/10' : ''
             )}
             onClick={() =>
-              strategy && 'id' in strategy
+              strategy && typeof strategy === 'object' && 'id' in strategy
                 ? setSelectedStrategyId(
                     selectedStrategyId === strategy.id ? null : (strategy.id as string)
                   )
                 : undefined
             }
           >
-            {strategy && 'id' in strategy ? (
+            {strategy && typeof strategy === 'object' && 'id' in strategy ? (() => {
+              const s = strategy as Strategy;
+              return (
               <div className="flex flex-col gap-4">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-lg font-semibold text-white">{strategy.name}</span>
+                      <span className="text-lg font-semibold text-white">{s.name}</span>
                       <span className="rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-text-secondary">
-                        {strategy.riskLevel}
+                        {s.riskLevel}
                       </span>
                     </div>
-                    <p className="text-xs text-text-secondary">{strategy.description}</p>
+                    <p className="text-xs text-text-secondary">{s.description}</p>
                   </div>
                   <div className="text-right text-xs text-text-secondary">
                     <p>月收益</p>
                     <p className="text-sm font-semibold text-success">
-                      {formatPercent(strategy.monthlyReturn)}
+                      {formatPercent(s.monthlyReturn)}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2 text-xs">
-                  {strategy.segments.map((segment) => (
+                  {s.segments.map((segment) => (
                     <span
                       key={segment.asset}
                       className={clsx(
@@ -192,26 +194,26 @@ export function StrategyHub({ category = 'all' }: StrategyHubProps) {
                 </div>
 
                 <div className="flex flex-wrap items-center gap-4 text-xs text-text-secondary">
-                  <span>已被 {formatCompactNumber(strategy.adoption)} 人复制</span>
-                  <span>👍 {formatCompactNumber(strategy.likes)}</span>
-                  <span>💬 {formatCompactNumber(strategy.comments)}</span>
+                  <span>已被 {formatCompactNumber(s.adoption)} 人复制</span>
+                  <span>👍 {formatCompactNumber(s.likes)}</span>
+                  <span>💬 {formatCompactNumber(s.comments)}</span>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleCopyStrategy(strategy);
+                      handleCopyStrategy(s);
                     }}
-                    disabled={copyingStrategyId === strategy.id}
+                    disabled={copyingStrategyId === s.id}
                     className="rounded-full bg-bifrost-primary px-4 py-2 text-xs font-semibold text-white shadow-[0_12px_24px_rgba(230,0,122,0.35)] transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    {copyingStrategyId === strategy.id ? '复制中...' : '一键复制策略'}
+                    {copyingStrategyId === s.id ? '复制中...' : '一键复制策略'}
                   </button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleViewDiscussion(strategy);
+                      handleViewDiscussion(s);
                     }}
                     className="rounded-full border border-white/10 px-3 py-1 text-xs text-text-secondary hover:border-white/20 hover:text-white"
                   >
@@ -219,7 +221,8 @@ export function StrategyHub({ category = 'all' }: StrategyHubProps) {
                   </button>
                 </div>
               </div>
-            ) : (
+              );
+            })() : (
               <div className="flex flex-col gap-3">
                 <div className="h-5 w-32 animate-pulse rounded-full bg-white/10" />
                 <div className="h-3 w-52 animate-pulse rounded-full bg-white/10" />
